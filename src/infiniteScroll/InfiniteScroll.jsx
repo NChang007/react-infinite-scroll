@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import './infiniteScroll.css'
+import PropTypes from 'prop-types';
 
 
 
@@ -18,27 +19,44 @@ const addScrollAnimation = () => {
   })
 }
 
-const InfiniteScroll = () => {
+const scrollerItem = ({children}) => {
+
+  return(
+    <li className='scroller-item'>
+      {children}
+    </li>
+  )
+}
+const Scroller = ({children, direction, speed, mWidth}) => {
 
   useEffect(() => {
     if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
       addScrollAnimation()
     }
   },[])
-
+  
   return (
-    <div className='scroller'>
+    <div 
+      className='scroller'
+      data-speed={speed}
+      data-direction={direction}
+      style={{maxWidth: `${mWidth}em`}}
+    >
       <ul className='tag-list scroller__inner' >
-        <li>HTML</li>
-        <li>CSS</li>
-        <li>JS</li>
-        <li>SSG</li>
-        <li>webdev</li>
-        <li>Animation</li>
-        <li>UI/UX</li>
+        {children}
       </ul>
     </div>
   )
 }
+Scroller.defaultProps = {
+  mWidth: '30'
+}
+Scroller.propTypes = {
+  direction: PropTypes.oneOf(['left', 'right']),
+  speed: PropTypes.oneOf(['fast', 'slow']),
+  speed: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+}
 
-export default InfiniteScroll
+Scroller.Item = scrollerItem
+
+export default Scroller
