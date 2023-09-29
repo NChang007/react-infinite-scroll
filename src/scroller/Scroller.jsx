@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import './infiniteScroll.css'
+import './scroller.css'
 import PropTypes from 'prop-types';
 
 
