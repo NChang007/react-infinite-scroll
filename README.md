@@ -28,7 +28,7 @@ npm run dev
 ```
 ## Usage
 
-Make sure to import the carousel and then call it like any other react component
+Make sure to import the scroller and then call it like any other react component
 ex:
 ```react
     <Scroller>
